@@ -1,36 +1,21 @@
-#
-<img src = "Vivaan’s_Logo.png" alt="Logo banner" width=600 height=200>
-
+## A Real Estate Portfolio Tracker
 ___
-## A Revolutionary Online Grocery Delivery Service
-___
-Vivaan's Express Groceries is an **online grocery delivery service** that allows users to order top-quality, 
-fresh groceries, without having to leave the comfort of their own homes. This application will
-serve as a convenient and effortless solution to a long and tiring visit to the grocery store. 
-We offer **competitive prices** for all our products, as well as **discounts for bulk orders**.
+Vivaan's Real Estate Portfolio Tracker is an **intuitive and user-friendly application** that allows real estate agents to 
+efficiently manage and keep track of their real estate properties and listings. This application will
+serve as a convenient and effortless solution to complicated record-keeping, as it allows users to add new listings, keep track
+of existing listings, sell listings and more.
 
-Vivaan's Express Groceries will offer:
-- Fruits
-- Vegetables
-- Red meat
-- Frozen foods
-- Dairy
-- Gluten-free and vegan options.
+Users can categorise the listings by demand, which helps determine trending listings and thus, provides valuable insights
+to improve sales.
 
-Users can select from a wide range of produce within these categories and have them delivered straight to their doorstep.
-
-Vivaan's Express Groceries is based out of Vancouver, but we offer low-cost delivery to every major Canadian city including Vancouver,
-Victoria, Calgary, Edmonton, Ottawa, and Toronto.
-
-As a student, I have firsthand experience with the troubles of grocery shopping namely the long lines, inflated prices, low quality, 
-confusing aisles, and most importantly, the physical struggle of carrying multiple bags of groceries home. This led me to think that I can find
-it inconvenient to have to go grocery shopping every two weeks, what about older people like our parents and grandparents, or people with disabilities? That is why I created Vivaan's Express 
-Groceries, a *user-friendly and accessible alternative* to the time-consuming, tiring, expensive, and inconvenient ordeal of everyday grocery shopping.
-
+Growing up, I have always been interested in real estate and real estate management. As such, when I learnt that real estate agents
+often manage a lot of listings at one time, I wanted to create an application that helps track the status of these listings
+in the form of a real estate portfolio tracker.
 ---
 ## User Stories
-- As a user, I want to be able to browse groceries by the categories listed above.
-- As a user, I want to see any available discounts or offers.
-- As a user, I want to be able to add multiple quantities of the same item to my cart.
-- As a user, I want to be able to view my current bill at any time.
-- As a user, I want to be able to pay my bill online (by a credit card transaction).
+- As a user, I want to be able to add a new real estate listing (with specific details about the listing).
+- As a user, I want to be able to maintain a portfolio of all my current listings.
+- As a user, I want to be able to be able to view all my unsold listings at any time.
+- As a user, I want to be able to mark a listing as sold and remove it from the portfolio.
+- As a user, I want to be able to view my listings, based on certain criteria (e.g., those that are in demand).
+- As a user, I want to be able to see the value of my portfolio at any time.
