@@ -48,6 +48,8 @@ class PortfolioTest {
     @Test
     public void testEmptyPortfolio() {
         assertTrue(testPortfolio.isPortfolioEmpty());
+        testPortfolio.addListingToPortfolio(testListing1);
+        assertFalse(testPortfolio.isPortfolioEmpty());
     }
 
     @Test
