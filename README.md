@@ -11,6 +11,7 @@ to improve sales.
 Growing up, I have always been interested in real estate and real estate management. As such, when I learnt that real estate agents
 often manage a lot of listings at one time, I wanted to create an application that helps track the status of these listings
 in the form of a real estate portfolio tracker.
+
 ---
 ## User Stories
 - As a user, I want to be able to add a new real estate listing (with specific details about the listing).
