@@ -14,9 +14,11 @@ class PortfolioTest {
     private Portfolio testPortfolio;
     private Listing testListing1;
     private Listing testListing2;
+    private Listing testListing3;
 
     private ArrayList<Listing> testUnsoldList1;
     private ArrayList<Listing> testUnsoldList2;
+    private ArrayList<Listing> testUnsoldList3;
     private ArrayList<Listing> testDemandList;
 
     @BeforeEach
@@ -25,6 +27,8 @@ class PortfolioTest {
                 true, false);
         testListing2 = new Listing(10, "626 Agronomy", "Villa", 1500, 450000,
                 false, false);
+        testListing3 = new Listing(55, "Totem", "Villa", 900, 120000,
+                false, true);
         testPortfolio = new Portfolio();
 
         testUnsoldList1 = new ArrayList<Listing>();
@@ -33,6 +37,9 @@ class PortfolioTest {
         testUnsoldList2 = new ArrayList<Listing>();
         testUnsoldList2.add(testListing1);
         testUnsoldList2.add(testListing2);
+
+        testUnsoldList3 = new ArrayList<Listing>();
+        testUnsoldList3.add(testListing3);
 
         testDemandList = new ArrayList<Listing>();
         testDemandList.add(testListing1);
@@ -75,6 +82,10 @@ class PortfolioTest {
         assertEquals(testUnsoldList1, testPortfolio.getAllUnsoldListings());
         testPortfolio.sellListing(90);
         assertTrue(testPortfolio.isPortfolioEmpty());
+
+        testPortfolio.addListingToPortfolio(testListing3);
+        testPortfolio.sellListing(55);
+        assertEquals(testUnsoldList3, testPortfolio.getAllUnsoldListings());
     }
 
     @Test
