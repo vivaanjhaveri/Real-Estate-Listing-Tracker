@@ -94,6 +94,7 @@ class PortfolioTest {
     @Test
     public void testGetInDemandListings() {
         testPortfolio.addListingToPortfolio(testListing1);
+        testPortfolio.addListingToPortfolio(testListing2);
         assertEquals(testUnsoldList1, testPortfolio.getAllInDemandListings());
     }
 }
