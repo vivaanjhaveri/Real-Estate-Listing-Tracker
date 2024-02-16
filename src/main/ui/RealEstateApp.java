@@ -21,7 +21,7 @@ public class RealEstateApp {
     // EFFECTS: processes user input
     private void runRealEstateApp() {
         boolean appStatus = true;
-        String userInput = null;
+        String userInput;
 
         startPortfolio();
         System.out.println("\nWelcome to Vivaan's Real Estate Portfolio Tracker");

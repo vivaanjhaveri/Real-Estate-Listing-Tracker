@@ -21,7 +21,7 @@ class PortfolioTest {
 
     @BeforeEach
     public void setUp() {
-        testListing1 = new Listing(900, "6110 Sunset Boulevard", "Apartment", 1000, 150000,
+        testListing1 = new Listing(90, "6110 Sunset Boulevard", "Apartment", 1000, 150000,
                 true, false);
         testListing2 = new Listing(10, "626 Agronomy", "Villa", 1500, 450000,
                 false, false);
@@ -61,7 +61,7 @@ class PortfolioTest {
     @Test
     public void testSellListing1() {
         testPortfolio.addListingToPortfolio(testListing1);
-        testPortfolio.sellListing(900);
+        testPortfolio.sellListing(90);
         assertTrue(testPortfolio.isPortfolioEmpty());
     }
 
@@ -73,7 +73,7 @@ class PortfolioTest {
         assertEquals(testUnsoldList2, testPortfolio.getAllUnsoldListings());
         testPortfolio.sellListing(10);
         assertEquals(testUnsoldList1, testPortfolio.getAllUnsoldListings());
-        testPortfolio.sellListing(900);
+        testPortfolio.sellListing(90);
         assertTrue(testPortfolio.isPortfolioEmpty());
     }
 
