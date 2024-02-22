@@ -1,0 +1,20 @@
+{"listingsInPortfolio": [
+    {
+        "size": 956,
+        "price": 900000,
+        "name": "Dreat",
+        "id": 558,
+        "type": "Building",
+        "demand": true,
+        "status": false
+    },
+    {
+        "size": 2000,
+        "price": 150000,
+        "name": "Blake",
+        "id": 9019,
+        "type": "Villa",
+        "demand": false,
+        "status": false
+    }
+]}

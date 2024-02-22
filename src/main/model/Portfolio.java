@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Maintains a portfolio of real estate listings
-public class Portfolio {
+public class Portfolio implements Writable {
 
     private ArrayList<Listing> allInDemandListings;
     private ArrayList<Listing> allUnsoldListings;
@@ -56,5 +60,26 @@ public class Portfolio {
 
     public boolean isPortfolioEmpty() {
         return (allUnsoldListings.size() == 0);
+    }
+
+    // EFFECTS: creates and returns json object
+    // CITATION: JsonSerializationDemo
+    //           URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("listingsInPortfolio", unsoldToJson());
+        return json;
+    }
+
+    // EFFECTS: returns unsold listings in this portfolio as a JSON array
+    // CITATION: JsonSerializationDemo
+    //           URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    private JSONArray unsoldToJson() {
+        JSONArray jsonUnsoldArray = new JSONArray();
+        for (Listing l : allUnsoldListings) {
+            jsonUnsoldArray.put(l.toJson());
+        }
+        return jsonUnsoldArray;
     }
 }

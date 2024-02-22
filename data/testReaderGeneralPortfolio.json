@@ -1,0 +1,23 @@
+{
+  "listingsInPortfolio": [
+    {
+    "size": 1000,
+    "price": 190000,
+    "name": "Sunset",
+    "id": 123,
+    "type": "Apartment",
+    "demand": true,
+    "status": false
+  },
+
+    {
+      "size": 1800,
+      "price": 2000000,
+      "name": "Agronomy",
+      "id": 100,
+      "type": "Villa",
+      "demand": false,
+      "status": false
+    }
+  ]
+}

@@ -2,18 +2,26 @@ package ui;
 
 import model.Portfolio;
 import model.Listing;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // Real estate tracker app
 public class RealEstateApp {
-
+    private static final String JSON_STORE_LOCATION = "./data/propertyPortfolio.json";
     private Portfolio propertyPortfolio;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the real estate tracker application
     public RealEstateApp() {
+        jsonWriter = new JsonWriter(JSON_STORE_LOCATION);
+        jsonReader = new JsonReader(JSON_STORE_LOCATION);
         runRealEstateApp();
     }
 
@@ -53,6 +61,10 @@ public class RealEstateApp {
             seeAllListingsInDemand();
         } else if (command.equals("5")) {
             givePortfolioValue();
+        } else if (command.equals("6")) {
+            savePortfolioToFile();
+        } else if (command.equals("7")) {
+            loadPortfolioFromFile();
         } else {
             System.out.println("\nPlease enter a valid choice");
         }
@@ -74,6 +86,8 @@ public class RealEstateApp {
         System.out.println("\t3 -> View all listings");
         System.out.println("\t4 -> View all listings currently in demand");
         System.out.println("\t5 -> Check portfolio value");
+        System.out.println("\t6 -> Save portfolio to file");
+        System.out.println("\t7 -> Load portfolio from file");
         System.out.println("\tquit -> quit");
     }
 
@@ -158,6 +172,32 @@ public class RealEstateApp {
                     + "\nListing size: " + l.getListingSize() + " sq.ft"
                     + "\nListing in demand? " + l.getListingDemand()
                     + "\nListing sold? " + l.getListingStatus() + "\n");
+        }
+    }
+
+    // MODIFIES: this, portfolio
+    // EFFECTS: Loads portfolio from JSON_STORE_LOCATION.
+    //          Else throws exception if not found.
+    private void loadPortfolioFromFile() {
+        try {
+            propertyPortfolio = jsonReader.read();
+            System.out.println("Loaded portfolio from " + JSON_STORE_LOCATION);
+        } catch (IOException e) {
+            System.out.println("Sorry, unable to read from file " + JSON_STORE_LOCATION);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Saves all listings in portfolio to JSON_STORE_LOCATION.
+    //          Else throws exception if unable to write to the desired file.
+    private void savePortfolioToFile() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(propertyPortfolio);
+            jsonWriter.close();
+            System.out.println("Saved portfolio to " + JSON_STORE_LOCATION);
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry, unable to write to file " + JSON_STORE_LOCATION);
         }
     }
 }

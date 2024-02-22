@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a real estate listing having a name, location, size, and price
-public class Listing {
+public class Listing implements Writable {
 
     private int listingID;                   // listing ID
     private String listingName;              // name of listing
@@ -27,6 +30,7 @@ public class Listing {
     }
 
     public String getListingName() {
+
         return listingName;
     }
 
@@ -35,18 +39,38 @@ public class Listing {
     }
 
     public boolean getListingDemand() {
+
         return isListingInDemand;
     }
 
     public double getListingSize() {
+
         return listingSize;
     }
 
     public double getListingPrice() {
+
         return listingPrice;
     }
 
     public boolean getListingStatus() {
+
         return isListingSold;
+    }
+
+    // EFFECTS: creates and returns json object
+    // CITATION: JsonSerializationDemo
+    //           URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", listingID);
+        json.put("name", listingName);
+        json.put("type", listingType);
+        json.put("size", listingSize);
+        json.put("price", listingPrice);
+        json.put("demand", isListingInDemand);
+        json.put("status", isListingSold);
+        return json;
     }
 }
