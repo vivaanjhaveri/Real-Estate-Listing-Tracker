@@ -1,0 +1,9 @@
+{"listingsInPortfolio": [{
+    "size": 100,
+    "price": 100,
+    "name": "test",
+    "id": 123,
+    "type": "test",
+    "demand": true,
+    "status": false
+}]}
