@@ -20,3 +20,5 @@ in the form of a real estate portfolio tracker.
 - As a user, I want to be able to mark a listing as sold and remove it from the portfolio.
 - As a user, I want to be able to view my listings, based on certain criteria (e.g., those that are in demand).
 - As a user, I want to be able to see the value of my portfolio at any time.
+- As a user, I want to have the option to save my entire real estate portfolio (containing all listings) to file.
+- As a user, I want to have the option to load my entire real estate portfolio from file, which contains all my saved listings.
