@@ -155,7 +155,7 @@ public class RealEstateApp {
         printListingsFrom(propertyPortfolio.getAllInDemandListings());
     }
 
-    // EFFECTS: prints sum of all unsold listings as value of portfolio
+    // EFFECTS: prints sum of the value of all unsold listings
     private void givePortfolioValue() {
         System.out.println("\nCurrent value of the portfolio is $"
                 + propertyPortfolio.checkPortfolioValue());
@@ -177,7 +177,7 @@ public class RealEstateApp {
 
     // MODIFIES: this, portfolio
     // EFFECTS: Loads portfolio from JSON_STORE_LOCATION.
-    //          Else throws exception if not found.
+    //         Prints exception if not found.
     private void loadPortfolioFromFile() {
         try {
             propertyPortfolio = jsonReader.read();
@@ -189,7 +189,7 @@ public class RealEstateApp {
 
     // MODIFIES: this
     // EFFECTS: Saves all listings in portfolio to JSON_STORE_LOCATION.
-    //          Else throws exception if unable to write to the desired file.
+    //          Prints exception if unable to write to the desired file.
     private void savePortfolioToFile() {
         try {
             jsonWriter.open();
