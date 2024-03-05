@@ -19,7 +19,7 @@ public class RealEstateApp {
     private JsonReader jsonReader;
 
     // EFFECTS: runs the real estate tracker application
-    public RealEstateApp() {
+    public RealEstateApp() throws FileNotFoundException {
         jsonWriter = new JsonWriter(JSON_STORE_LOCATION);
         jsonReader = new JsonReader(JSON_STORE_LOCATION);
         runRealEstateApp();
