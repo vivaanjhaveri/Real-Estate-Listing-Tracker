@@ -71,6 +71,7 @@ class PortfolioTest {
     public void testSellListing1() {
         testPortfolio.addListingToPortfolio(testListing1);
         testPortfolio.sellListing(90);
+        assertTrue(testPortfolio.getAllInDemandListings().isEmpty());
         assertTrue(testPortfolio.isPortfolioEmpty());
     }
 
@@ -95,6 +96,13 @@ class PortfolioTest {
         testPortfolio.addListingToPortfolio(testListing1);
         testPortfolio.addListingToPortfolio(testListing2);
         assertEquals(600000, testPortfolio.checkPortfolioValue());
+    }
+
+    @Test
+    public void testPortfolioContainsID() {
+        assertFalse(testPortfolio.portfolioContainsListing(90));
+        testPortfolio.addListingToPortfolio(testListing1);
+        assertTrue(testPortfolio.portfolioContainsListing(90));
     }
 
     @Test

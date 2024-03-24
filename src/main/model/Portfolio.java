@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Maintains a portfolio of real estate listings
@@ -33,12 +34,17 @@ public class Portfolio implements Writable {
     // EFFECTS: sells the listing associated with the provided listingIDToSell by removing it from portfolio
     public void sellListing(Integer listingIDToSell) {
         ArrayList<Listing> toRemove = new ArrayList<Listing>();
+        ArrayList<Listing> toRemoveWithDemand = new ArrayList<Listing>();
         for (Listing l : allUnsoldListings) {
             if (listingIDToSell == l.getListingID() && !l.getListingStatus()) {
                 toRemove.add(l);
             }
+            if (listingIDToSell == l.getListingID() && !l.getListingStatus() && l.getListingDemand()) {
+                toRemoveWithDemand.add(l);
+            }
         }
         allUnsoldListings.removeAll(toRemove);
+        allInDemandListings.removeAll(toRemoveWithDemand);
     }
 
     // EFFECTS: calculates sum of all unsold listings as value of portfolio
@@ -48,6 +54,15 @@ public class Portfolio implements Writable {
             portfolioValue += allUnsoldListings.get(i).getListingPrice();
         }
         return portfolioValue;
+    }
+
+    public boolean portfolioContainsListing(int listingID) {
+        for (Listing l: getAllUnsoldListings()) {
+            if (l.getListingID() == listingID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Listing> getAllInDemandListings() {
