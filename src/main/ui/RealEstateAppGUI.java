@@ -178,8 +178,10 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
         sellListingPanel = createPanel("Sell Current Listing");
 
         gridBagConstraints.gridy++;
-        addLabelAndTextField(sellListingPanel, "Listing ID to sell:", listingIDSellField = new JTextField());
-        addLabelAndTextField(sellListingPanel, "Price sold at (CAD$):", listingPriceSellField = new JTextField());
+        addLabelAndTextField(sellListingPanel, "Listing ID to sell:",
+                listingIDSellField = new JTextField());
+        addLabelAndTextField(sellListingPanel, "Price sold at (CAD$):",
+                listingPriceSellField = new JTextField());
 
         JPanel sellButtonPanel = new JPanel();
         sellListingFromPortfolioButton = createButton("Sell Listing");
@@ -349,8 +351,12 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
 
         Listing listingToAdd = new Listing(listingId, listingName, listingType, listingPrice,
                 listingSize, isListingInDemand, false);
-        portfolio.addListingToPortfolio(listingToAdd);
-        JOptionPane.showMessageDialog(null, "Listing ID " + listingId + " added successfully!");
+        if (portfolio.portfolioContainsListing(listingId)) {
+            JOptionPane.showMessageDialog(null, "Listing ID already exists.");
+        } else {
+            portfolio.addListingToPortfolio(listingToAdd);
+            JOptionPane.showMessageDialog(null, "Listing ID " + listingId + " added successfully!");
+        }
     }
 
     // MODIFIES: this, portfolio
@@ -363,7 +369,8 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
         } else {
             if (portfolio.portfolioContainsListing(listingId)) {
                 portfolio.sellListing(listingId);
-                JOptionPane.showMessageDialog(null, "Listing ID " + listingId + " sold successfully!");
+                JOptionPane.showMessageDialog(null, "Listing ID " + listingId
+                        + " sold successfully!");
             } else {
                 JOptionPane.showMessageDialog(null, "Listing ID " + listingId + " not found!");
             }

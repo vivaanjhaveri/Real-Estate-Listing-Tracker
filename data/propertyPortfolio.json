@@ -1,9 +1,9 @@
 {"listingsInPortfolio": [{
-    "size": 0,
-    "price": 0,
-    "name": "1",
-    "id": 123,
-    "type": "1",
+    "size": 1,
+    "price": 1,
+    "name": "test",
+    "id": 11,
+    "type": "test",
     "demand": true,
     "status": false
 }]}
