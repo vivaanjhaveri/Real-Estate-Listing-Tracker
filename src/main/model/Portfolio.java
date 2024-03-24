@@ -56,6 +56,7 @@ public class Portfolio implements Writable {
         return portfolioValue;
     }
 
+    // EFFECTS: returns true if the portfolio contains the given listing id
     public boolean portfolioContainsListing(int listingID) {
         for (Listing l: getAllUnsoldListings()) {
             if (l.getListingID() == listingID) {

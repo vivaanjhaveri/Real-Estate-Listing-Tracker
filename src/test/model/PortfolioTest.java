@@ -106,6 +106,13 @@ class PortfolioTest {
     }
 
     @Test
+    public void testPortfolioContainsNonExistentID() {
+        assertFalse(testPortfolio.portfolioContainsListing(0));
+        testPortfolio.addListingToPortfolio(testListing1);
+        assertFalse(testPortfolio.portfolioContainsListing(44));
+    }
+
+    @Test
     public void testGetUnsoldListings() {
         testPortfolio.addListingToPortfolio(testListing1);
         testPortfolio.addListingToPortfolio(testListing2);
