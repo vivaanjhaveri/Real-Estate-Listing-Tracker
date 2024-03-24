@@ -58,6 +58,7 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
 
     private JLabel welcomeLabel;
 
+    private GridBagConstraints gridBagConstraints;
     private GridBagConstraints labelConstraints;
     private GridBagConstraints fieldConstraints;
 
@@ -111,63 +112,35 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates main menu panel
+    // EFFECTS: Creates main menu panel
     private void mainMenu() {
         guiFrame.getContentPane().removeAll(); // Clear previous content
-
-        mainMenuPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                paintBackgroundImage(this, g);
-            }
-        };
-
-        GridBagConstraints gbc = createGridBagConstraints(0,0,2);
-
-        JLabel titleLabel = new JLabel("Portfolio Main Menu");
-        titleLabel.setFont(titleFont);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        mainMenuPanel.add(titleLabel, gbc);
-
-        GridBagConstraints buttonConstraints = createGridBagConstraints(0,1,1);
-
-        addListingButton = new JButton("Add new listing to portfolio");
-        addListingButton.addActionListener(this);
-        mainMenuPanel.add(addListingButton, buttonConstraints);
-
-        buttonConstraints.gridy++; // Move to the next column
-        sellListingButton = new JButton("Sell current listing");
-        sellListingButton.addActionListener(this);
-        mainMenuPanel.add(sellListingButton, buttonConstraints);
-
-        buttonConstraints.gridy++; // Move to the next row
-        viewAllButton = new JButton("View all listings");
-        viewAllButton.addActionListener(this);
-        mainMenuPanel.add(viewAllButton, buttonConstraints);
-
-        buttonConstraints.gridy++; // Move to the next row
-        viewDemandButton = new JButton("View listings in demand");
-        viewDemandButton.addActionListener(this);
-        mainMenuPanel.add(viewDemandButton, buttonConstraints);
-
-        buttonConstraints.gridy++; // Move to the next row
-        viewPortfolioValueButton = new JButton("View portfolio value");
-        viewPortfolioValueButton.addActionListener(this);
-        mainMenuPanel.add(viewPortfolioValueButton, buttonConstraints);
-
-        JPanel saveLoadPanel = new JPanel();
-        saveToFileButton = new JButton("Save portfolio to file");
-        saveToFileButton.addActionListener(this);
-        saveLoadPanel.add(saveToFileButton, buttonConstraints);
-
-        loadFromFileButton = new JButton("Load portfolio from file");
-        loadFromFileButton.addActionListener(this);
-        saveLoadPanel.add(loadFromFileButton, buttonConstraints);
-
-        guiFrame.add(mainMenuPanel, BorderLayout.CENTER);
-        guiFrame.add(saveLoadPanel, BorderLayout.SOUTH);
+        mainMenuPanel = createPanel("Portfolio Main Menu");
+        addButtonsToMenuPanel();
+        addSaveLoadPanelToFrame();
         guiFrame.revalidate(); // Refresh the frame to display changes
+    }
+
+    // MODIFIES: this, mainMenuPanel
+    // EFFECTS: Add buttons to the main menu panel
+    private void addButtonsToMenuPanel() {
+        GridBagConstraints buttonConstraints = createGridBagConstraints(0, 1, 1);
+
+        addListingButton = createButton("Add new listing to portfolio");
+        sellListingButton = createButton("Sell current listing");
+        viewAllButton = createButton("View all listings");
+        viewDemandButton = createButton("View listings in demand");
+        viewPortfolioValueButton = createButton("View portfolio value");
+
+        mainMenuPanel.add(addListingButton, buttonConstraints);
+        buttonConstraints.gridy++;
+        mainMenuPanel.add(sellListingButton, buttonConstraints);
+        buttonConstraints.gridy++;
+        mainMenuPanel.add(viewAllButton, buttonConstraints);
+        buttonConstraints.gridy++;
+        mainMenuPanel.add(viewDemandButton, buttonConstraints);
+        buttonConstraints.gridy++;
+        mainMenuPanel.add(viewPortfolioValueButton, buttonConstraints);
     }
 
     // MODIFIES: this
@@ -175,22 +148,9 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     private void addListingToPortfolio() {
         guiFrame.getContentPane().removeAll(); // Clear previous content
 
-        addListingPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                paintBackgroundImage(this, g);
-            }
-        };
+        addListingPanel = createPanel("Create new listing");
 
-        GridBagConstraints gbc = createGridBagConstraints(0,0,2);
-
-        JLabel titleLabel = new JLabel("Create New Listing");
-        titleLabel.setFont(titleFont);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        addListingPanel.add(titleLabel, gbc);
-
-        gbc.gridy++;
+        gridBagConstraints.gridy++;
         addLabelAndTextField(addListingPanel, "Listing ID:", listingIdField = new JTextField());
         addLabelAndTextField(addListingPanel, "Listing Name:", listingNameField = new JTextField());
         addLabelAndTextField(addListingPanel, "Listing Type:", listingTypeField = new JTextField());
@@ -200,12 +160,9 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
                 new Boolean[]{Boolean.TRUE, Boolean.FALSE}));
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        createListingButton = new JButton("Create Listing");
-        createListingButton.addActionListener(this);
+        createListingButton = createButton("Create Listing");
+        mainMenuButton = createButton("Main Menu");
         buttonPanel.add(createListingButton);
-
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(this);
         buttonPanel.add(mainMenuButton);
 
         guiFrame.add(addListingPanel, BorderLayout.CENTER);
@@ -213,46 +170,21 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
         guiFrame.revalidate(); // Refresh the frame to display changes
     }
 
-    // EFFECTS: Helper method to add label and text field to panel
-    private void addLabelAndTextField(JPanel panel, String labelText, JComponent textField) {
-        labelConstraints = createGridBagConstraints(0,GridBagConstraints.RELATIVE,1);
-        fieldConstraints = createGridBagConstraints(1,GridBagConstraints.RELATIVE,1);
-
-        panel.add(new JLabel(labelText), labelConstraints);
-        panel.add(textField, fieldConstraints);
-    }
-
     // MODIFIES: this
     // EFFECTS: GUI page for selling a listing
     private void sellListingFromPortfolio() {
         guiFrame.getContentPane().removeAll(); // Clear previous content
 
-        sellListingPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                paintBackgroundImage(this, g);
-            }
-        };
+        sellListingPanel = createPanel("Sell Current Listing");
 
-        GridBagConstraints gbc = createGridBagConstraints(0,0,2);
-
-        JLabel titleLabel = new JLabel("Sell Current Listing");
-        titleLabel.setFont(titleFont);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        sellListingPanel.add(titleLabel, gbc);
-
-        gbc.gridy++;
+        gridBagConstraints.gridy++;
         addLabelAndTextField(sellListingPanel, "Listing ID to sell:", listingIDSellField = new JTextField());
         addLabelAndTextField(sellListingPanel, "Price sold at (CAD$):", listingPriceSellField = new JTextField());
 
         JPanel sellButtonPanel = new JPanel();
-        sellListingFromPortfolioButton = new JButton("Sell Listing");
-        sellListingFromPortfolioButton.addActionListener(this);
+        sellListingFromPortfolioButton = createButton("Sell Listing");
+        mainMenuButton = createButton("Main Menu");
         sellButtonPanel.add(sellListingFromPortfolioButton);
-
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(this);
         sellButtonPanel.add(mainMenuButton);
 
         guiFrame.add(sellListingPanel, BorderLayout.CENTER);
@@ -265,31 +197,18 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     private void viewAllListingsInPortfolio() {
         guiFrame.getContentPane().removeAll(); // Clear previous content
 
-        viewPortfolioPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                paintBackgroundImage(this, g);
-            }
-        };
+        viewPortfolioPanel = createPanel("Current Portfolio");
 
-        GridBagConstraints gbc = createGridBagConstraints(0,0,2);
-        JLabel titleLabel = new JLabel("Current Portfolio");
-        titleLabel.setFont(titleFont);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        viewPortfolioPanel.add(titleLabel, gbc);
-
-        gbc.gridy++;
+        gridBagConstraints.gridy++;
         if (portfolio.isPortfolioEmpty()) {
             JLabel noListings = new JLabel("There are currently no listings in portfolio");
-            viewPortfolioPanel.add(noListings, gbc);
+            viewPortfolioPanel.add(noListings, gridBagConstraints);
         } else {
-            generateTableForPortfolio(gbc);
+            generateTableForPortfolio(gridBagConstraints);
         }
 
         JPanel buttonPanel = new JPanel();
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(this);
+        mainMenuButton = createButton("Main Menu");
         buttonPanel.add(mainMenuButton);
 
         guiFrame.add(viewPortfolioPanel, BorderLayout.CENTER);
@@ -313,7 +232,6 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
             double price = portfolio.getAllUnsoldListings().get(i).getListingPrice();
             double size = portfolio.getAllUnsoldListings().get(i).getListingSize();
             boolean demand = portfolio.getAllUnsoldListings().get(i).getListingDemand();
-       //     boolean status = portfolio.getAllUnsoldListings().get(i).getListingStatus();
 
             Object[] data = {id, name, type, price, size, demand};
             tableModel.addRow(data);
@@ -326,34 +244,21 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     private void viewAllInDemandInPortfolio() {
         guiFrame.getContentPane().removeAll(); // Clear previous content
 
-        viewInDemandPortfolioPanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                paintBackgroundImage(this, g);
-            }
-        };
+        viewInDemandPortfolioPanel = createPanel("Current Listings in Demand");
 
-        GridBagConstraints gbc = createGridBagConstraints(0,0,2);
-        JLabel titleLabel = new JLabel("Current Listings in Demand");
-        titleLabel.setFont(titleFont);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        viewInDemandPortfolioPanel.add(titleLabel, gbc);
-
-        gbc.gridy++;
+        gridBagConstraints.gridy++;
         if (portfolio.isPortfolioEmpty()) {
             JLabel noListings = new JLabel("There are currently no listings in portfolio");
-            viewInDemandPortfolioPanel.add(noListings, gbc);
+            viewInDemandPortfolioPanel.add(noListings, gridBagConstraints);
         } else if (portfolio.getAllInDemandListings().size() == 0) {
             JLabel noDemandListings = new JLabel("There are currently no listings in demand");
-            viewInDemandPortfolioPanel.add(noDemandListings, gbc);
+            viewInDemandPortfolioPanel.add(noDemandListings, gridBagConstraints);
         } else {
-            generateDemandTableForPortfolio(gbc);
+            generateDemandTableForPortfolio(gridBagConstraints);
         }
 
         JPanel buttonPanel = new JPanel();
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(this);
+        mainMenuButton = createButton("Main Menu");
         buttonPanel.add(mainMenuButton);
 
         guiFrame.add(viewInDemandPortfolioPanel, BorderLayout.CENTER);
@@ -388,29 +293,15 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     private void viewPortfolioValue() {
         guiFrame.getContentPane().removeAll(); // Clear previous content
 
-        viewValuePanel = new JPanel(new GridBagLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                paintBackgroundImage(this, g);
-            }
-        };
+        viewValuePanel = createPanel("Current Portfolio Value");
 
-        GridBagConstraints gbc = createGridBagConstraints(0,0,2);
-
-        JLabel titleLabel = new JLabel("Current Portfolio Value");
-        titleLabel.setFont(titleFont);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        viewValuePanel.add(titleLabel, gbc);
-
-        gbc.gridy++;
+        gridBagConstraints.gridy++;
         JLabel numCountValueText = new JLabel("There are currently " + portfolio.getAllUnsoldListings().size()
                 + " listings in portfolio with a total value of $ " + portfolio.checkPortfolioValue());
-        viewValuePanel.add(numCountValueText, gbc);
+        viewValuePanel.add(numCountValueText, gridBagConstraints);
 
         JPanel buttonPanel = new JPanel();
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(this);
+        mainMenuButton = createButton("Main Menu");
         buttonPanel.add(mainMenuButton);
 
         guiFrame.add(viewValuePanel, BorderLayout.CENTER);
@@ -504,6 +395,58 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: mainMenuPanel, this
+    // EFFECTS: helper method to create the panel with given title and background image
+    private JPanel createPanel(String panelTitle) {
+        JPanel panel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                paintBackgroundImage(this, g);
+            }
+        };
+
+        gridBagConstraints = createGridBagConstraints(0, 0, 2);
+        JLabel titleLabel = new JLabel(panelTitle);
+        titleLabel.setFont(titleFont);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(titleLabel, gridBagConstraints);
+
+        return panel;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Add the save/load portfolio panel to the frame
+    private void addSaveLoadPanelToFrame() {
+        JPanel saveLoadPanel = new JPanel();
+        saveToFileButton = createButton("Save portfolio to file");
+        loadFromFileButton = createButton("Load portfolio from file");
+
+        saveLoadPanel.add(saveToFileButton);
+        saveLoadPanel.add(loadFromFileButton);
+
+        guiFrame.add(mainMenuPanel, BorderLayout.CENTER);
+        guiFrame.add(saveLoadPanel, BorderLayout.SOUTH);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates a button with the given label
+    private JButton createButton(String label) {
+        JButton button = new JButton(label);
+        button.addActionListener(this);
+        return button;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Helper method to add label and text field to panel
+    private void addLabelAndTextField(JPanel panel, String labelText, JComponent textField) {
+        labelConstraints = createGridBagConstraints(0,GridBagConstraints.RELATIVE,1);
+        fieldConstraints = createGridBagConstraints(1,GridBagConstraints.RELATIVE,1);
+
+        panel.add(new JLabel(labelText), labelConstraints);
+        panel.add(textField, fieldConstraints);
+    }
+
     // MODIFIES: this
     // EFFECTS: sets background image
     private void paintBackgroundImage(JPanel panel, Graphics g) {
@@ -516,7 +459,7 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets gridbag constraints
+    // EFFECTS: sets gridBag constraints
     private GridBagConstraints createGridBagConstraints(int x, int y, int gridWidth) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = x;
@@ -527,6 +470,3 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
         return gbc;
     }
 }
-
-
-
