@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class RealEstateAppGUI extends JFrame implements ActionListener {
 
-    public static final int WIDTH = 1000;
+    public static final int WIDTH = 750;
     public static final int HEIGHT = 750;
 
     private static final String JSON_STORE_LOCATION = "./data/propertyPortfolio.json";
