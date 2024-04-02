@@ -1,7 +1,7 @@
 package ui;
 
-import model.Listing;
-import model.Portfolio;
+import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -67,6 +69,8 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    private EventLog eventLog = EventLog.getInstance(); // creates event log
+
     // Constructs GUI
     RealEstateAppGUI() {
         guiFrame = new JFrame("Vivaan's Real Estate Portfolio Tracker");
@@ -82,6 +86,25 @@ public class RealEstateAppGUI extends JFrame implements ActionListener {
         welcomeScreen();
         guiFrame.add(startPanel);
         guiFrame.setVisible(true);
+
+        guiFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                printEventLog();
+                eventLog.clear();
+            }
+        });
+    }
+
+    // EFFECTS: prints and clears event log
+    private void printEventLog() {
+        System.out.println("Events logged since application started:");
+        for (Event e : eventLog) {
+            System.out.println(e);
+        }
+        eventLog.clear();
+        System.out.println("Event log cleared.");
     }
 
     // MODIFIES: this

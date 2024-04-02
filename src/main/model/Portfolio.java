@@ -17,16 +17,20 @@ public class Portfolio implements Writable {
     public Portfolio() {
         allInDemandListings = new ArrayList<Listing>();
         allUnsoldListings = new ArrayList<Listing>();
+        EventLog.getInstance().logEvent(new Event("Portfolio created"));
     }
 
     // MODIFIES: this
     // EFFECTS: adds provided listing to list of unsold listings, if listing has true in demand status,
     //          also adds it to list of in-demand listings
+    // CITATION: Code obtained from AlarmSystem
+    //           URL: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem/blob/main/src/main/ca/ubc/cpsc210/alarm/model/Event.java
     public void addListingToPortfolio(Listing listing) {
         allUnsoldListings.add(listing);
         if (listing.getListingDemand()) {
             allInDemandListings.add(listing);
         }
+        EventLog.getInstance().logEvent(new Event("New listing with ID " + listing.getListingID() + " created."));
     }
 
     // REQUIRES: listing with provided listingIDToSell exists in list of unsold listings
@@ -45,6 +49,7 @@ public class Portfolio implements Writable {
         }
         allUnsoldListings.removeAll(toRemove);
         allInDemandListings.removeAll(toRemoveWithDemand);
+        EventLog.getInstance().logEvent(new Event("Listing " + listingIDToSell + " sold."));
     }
 
     // EFFECTS: calculates sum of all unsold listings as value of portfolio
@@ -53,6 +58,7 @@ public class Portfolio implements Writable {
         for (int i = 0; i < allUnsoldListings.size(); i++) {
             portfolioValue += allUnsoldListings.get(i).getListingPrice();
         }
+        EventLog.getInstance().logEvent(new Event("Current portfolio value is " + portfolioValue));
         return portfolioValue;
     }
 
@@ -60,9 +66,11 @@ public class Portfolio implements Writable {
     public boolean portfolioContainsListing(int listingID) {
         for (Listing l: getAllUnsoldListings()) {
             if (l.getListingID() == listingID) {
+                EventLog.getInstance().logEvent(new Event("Portfolio contains listing ID " + listingID));
                 return true;
             }
         }
+        EventLog.getInstance().logEvent(new Event("Portfolio does not contain listing ID " + listingID));
         return false;
     }
 

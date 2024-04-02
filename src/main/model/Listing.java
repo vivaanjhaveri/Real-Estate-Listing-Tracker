@@ -6,10 +6,10 @@ import persistence.Writable;
 // Represents a real estate listing having a name, location, size, and price
 public class Listing implements Writable {
 
-    private int listingID;                   // listing ID
-    private String listingName;              // name of listing
-    private String listingType;              // type of listing
-    private double listingSize;              // size of the listing (in square feet)
+    private int listingID;                  // listing ID
+    private String listingName;             // name of listing
+    private String listingType;             // type of listing
+    private double listingSize;             // size of the listing (in square feet)
     private double listingPrice;            // price of the listing
     private boolean isListingInDemand;      // is the listing in demand
     private boolean isListingSold;          // listing status (sold or not) of the listing
@@ -30,7 +30,6 @@ public class Listing implements Writable {
     }
 
     public String getListingName() {
-
         return listingName;
     }
 
@@ -39,22 +38,18 @@ public class Listing implements Writable {
     }
 
     public boolean getListingDemand() {
-
         return isListingInDemand;
     }
 
     public double getListingSize() {
-
         return listingSize;
     }
 
     public double getListingPrice() {
-
         return listingPrice;
     }
 
     public boolean getListingStatus() {
-
         return isListingSold;
     }
 

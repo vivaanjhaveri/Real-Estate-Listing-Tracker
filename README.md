@@ -41,3 +41,23 @@ main menu.
 - You can locate my visual component by looking at the background image of the GUI.
 - You can save the state of my application by clicking the "Load Portfolio button" in the main menu.
 - You can reload the state of my application by clicking the "Save Portfolio" button in the main menu.
+---
+# Phase 4: Task 2
+Events logged since application started:<br>
+Tue Apr 02 11:40:37 PDT 2024 <br>
+Portfolio created<br>
+Tue Apr 02 11:40:49 PDT 2024<br>
+Portfolio does not contain listing ID 123<br>
+Tue Apr 02 11:40:49 PDT 2024<br>
+New listing with ID 123 created.<br>
+Tue Apr 02 11:41:09 PDT 2024<br>
+Portfolio does not contain listing ID 456<br>
+Tue Apr 02 11:41:09 PDT 2024<br>
+New listing with ID 456 created.<br>
+Tue Apr 02 11:41:13 PDT 2024<br>
+Current portfolio value is 536.0<br>
+Tue Apr 02 11:41:19 PDT 2024<br>
+Portfolio contains listing ID 456<br>
+Tue Apr 02 11:41:19 PDT 2024<br>
+Listing 456 sold.<br>
+Event log cleared.
