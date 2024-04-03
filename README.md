@@ -61,3 +61,11 @@ Portfolio contains listing ID 456<br>
 Tue Apr 02 11:41:19 PDT 2024<br>
 Listing 456 sold.<br>
 Event log cleared.
+---
+# Phase 4: Task 3
+With more time to improve on the design on my application, I would improve the organization and cohesion of the `Listing` class with the help of refactoring.
+Currently, this seems to handle multiple responsibilities related to a property, such as its ID, name, type, price, size, and demand status. 
+A refactoring approach could involve breaking down the `Listing` class into smaller, more focused classes, each responsible for a single aspect of a property. 
+For example, separate classes could be created for `ListingID`, `ListingName`, `ListingPrice`, `ListingSize`, and `ListingDemand`. 
+This refactoring would adhere more closely to the Single Responsibility Principle (SRP) and make it easier to understand, modify, and extend in the future.
+Additionally, introducing an interface or abstract class for listings could provide a standardized structure for different types of properties. This could accommodate various property types (e.g., residential, commercial, industrial) with specific attributes and behaviors.
