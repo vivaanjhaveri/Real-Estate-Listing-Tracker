@@ -43,6 +43,7 @@ main menu.
 - You can reload the state of my application by clicking the "Save Portfolio" button in the main menu.
 ---
 # Phase 4: Task 2
+
 Events logged since application started:<br>
 Tue Apr 02 11:40:37 PDT 2024 <br>
 Portfolio created<br>
